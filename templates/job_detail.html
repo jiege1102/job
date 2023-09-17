@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">{{ job.title }}</h1>
+                    <p class="card-subtitle mb-2 text-muted">发布日期: {{ job.created_at }}</p>
+                    <p class="card-text">{{ job.description }}</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">工作详情</h3>
+                    <ul class="list-unstyled">
+                        <li><strong>公司:</strong> {{ job.company }}</li>
+                        <li><strong>薪资:</strong> {{ job.salary }}</li>
+                        <li><strong>地址:</strong> {{ job.address }}</li>
+                        <li><strong>职位:</strong> {{ job.post }}</li>
+                        <li><strong>经验:</strong> {{ job.experience }}</li>
+                        <li><strong>公司介绍:</strong> {{ job.type }}</li>
+                        <!-- 添加其他工作信息字段，如工作类型、公司信息等 -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 显示评论和评分 -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">用户评论</h3>
+                    <!-- 在此处显示用户评论和评分 -->
+                    <!-- 可以使用循环显示每个评论 -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">联系信息</h5>
+                    <!-- 如果有用户信息和工作发布者相关联，可以在这里显示作者信息 -->
+                    <!-- <p class="card-text">发布者: {{ job.author }}</p> -->
+                    <!-- 添加其他联系信息字段，如电子邮件、电话等 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <a href="{% url 'job_list' %}" class="btn btn-primary">返回工作列表</a>
+            {% if user.is_authenticated and not user.is_staff %}
+            <a href="{% url 'apply_for_job' job.id %}" class="btn btn-primary">投递简历</a>
+            {% endif %}
+
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'view_applications' job.id %}" class="btn btn-primary">查看投递信息</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

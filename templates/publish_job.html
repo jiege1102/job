@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static custom_tags %}
+
+{% block content %}
+<style>
+  /* base.css */
+
+  .form-card {
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+  };
+
+  .btn btn-primary {
+    display: flex;
+    justify-content: center;
+    };
+</style>
+<div class="container mt-5">
+
+  <div class="card form-card">
+    <div class="card-body">
+
+      <h1 class="mb-4">发布工作</h1>
+
+      <form method="post">
+
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">标题</label>
+          <div class="col-10">
+            {{ form.title|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">公司</label>
+          <div class="col-10">
+            {{ form.company|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">薪资</label>
+          <div class="col-10">
+            {{ form.salary|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">地址</label>
+          <div class="col-10">
+            {{ form.address|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">职位信息</label>
+          <div class="col-10">
+            {{ form.post|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">经验要求</label>
+          <div class="col-10">
+            {{ form.experience|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">公司介绍</label>
+          <div class="col-10">
+            {{ form.type|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">任职要求</label>
+          <div class="col-10">
+            {{ form.demand|add_class:"form-control" }}
+          </div>
+        </div>
+
+        <button class="btn btn-primary">提交</button>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}

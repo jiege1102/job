@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">投递简历</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+            <label for="{{ form.resume.id_for_label }}">选择简历</label>
+            <select class="form-control" id="{{ form.resume.id_for_label }}" name="{{ form.resume.name }}">
+                <option value="">选择一份简历</option>
+                {% for resume in resumes %}
+                    <option value="{{ resume.id }}">{{ resume.full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+</div>
+{% endblock content %}

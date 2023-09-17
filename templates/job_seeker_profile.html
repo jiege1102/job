@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>个人中心</h1>
+
+    <!-- 显示用户的投递记录 -->
+    <h2>我的投递记录</h2>
+    <ul>
+        {% for application in applications %}
+            <li>
+                <a href="{% url 'job_detail' application.job.id %}">{{ application.job.title }}</a>
+            </li>
+        {% empty %}
+            <li>暂无投递记录</li>
+        {% endfor %}
+    </ul>
+
+    <!-- 显示用户的个人简历，如果存在的话 -->
+    {% if resume %}
+        <h2>我的简历</h2>
+        <p><strong>姓名:</strong> {{ resume.full_name }}</p>
+        <p><strong>联系方式:</strong> {{ resume.contact_info }}</p>
+        <p><strong>教育背景:</strong> {{ resume.education }}</p>
+        <p><strong>工作经验:</strong> {{ resume.work_experience }}</p>
+        <p><strong>技能:</strong> {{ resume.skills }}</p>
+
+        <!-- 编辑简历按钮 -->
+        <a href="#" class="btn btn-primary">编辑简历</a>
+    {% else %}
+        <p>你还没有创建个人简历。</p>
+        <!-- 创建简历按钮 -->
+        <a href="{% url 'create_resume' %}" class="btn btn-primary">创建简历</a>
+    {% endif %}
+</div>
+{% endblock content %}

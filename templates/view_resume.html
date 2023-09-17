@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>我的简历</h1>
+    <h2>{{ resume.full_name }}</h2>
+    <p><strong>联系方式:</strong> {{ resume.contact_info }}</p>
+    <h3>教育背景</h3>
+    <p>{{ resume.education }}</p>
+    <h3>工作经验</h3>
+    <p>{{ resume.work_experience }}</p>
+    <h3>技能</h3>
+    <p>{{ resume.skills }}</p>
+    {% if user.is_authenticated and user == resume.user %}
+    <a href="{% url 'create_resume' %}" class="btn btn-primary">编辑简历</a>
+    {% endif %}
+</div>
+{% endblock content %}

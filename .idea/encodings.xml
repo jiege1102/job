@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$USER_HOME$/Desktop/clean_全国.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bestjob/views.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/static" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/base.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/footer.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/header.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/login.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/templates/register.html" charset="GBK" />
+  </component>
+</project>

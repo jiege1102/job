@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">查看投递信息</h1>
+    <h2>{{ job.title }}</h2>
+
+    <h3>投递的简历：</h3>
+    <ul>
+        {% for application in applications %}
+    <li>
+        {{ application.applicant.username }} - {{ application.applicant.email }}
+        (<a href="{% url 'view_resume' application.resume.id %}" target="_blank">查看简历</a>)
+    </li>
+        {% empty %}
+    <li>暂无简历投递</li>
+        {% endfor %}
+
+    </ul>
+
+    <a href="{% url 'job_list' %}" class="btn btn-primary">返回工作列表</a>
+</div>
+{% endblock content %}
+

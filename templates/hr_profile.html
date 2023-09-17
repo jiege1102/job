@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">HR 个人中心</h1>
+
+    <h2>发布的工作列表</h2>
+    <ul>
+        {% for job in jobs %}
+        <li>
+            <a href="{% url 'job_detail' job.id %}">{{ job.title }}</a>
+            <!-- 添加其他工作信息字段，如薪资、公司等 -->
+        </li>
+        {% empty %}
+        <li>您还没有发布过工作。</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'job_list' %}" class="btn btn-primary">返回工作列表</a>
+    <a href="{% url 'publish_job' %}" class="btn btn-primary">发布工作</a>
+</div>
+{% endblock content %}

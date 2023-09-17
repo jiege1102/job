@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* 去除卡片的边框 */
+    .card {
+        border: none;
+    }
+
+    /* 自定义卡片样式 */
+    .job-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    /* 自定义按钮样式 */
+    .apply-button {
+        background-color: #28a745;
+        border: none;
+    }
+
+    /* 居中按钮 */
+    .center-button {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* 底部页码导航居中 */
+    .center-pagination {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="mb-4">招聘信息</h1>
+
+    <div class="row">
+        <!-- 左侧列，用于工作分类 -->
+        <div class="col-md-2">
+            <h5 class="mb-3">工作分类：</h5>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="#">技术</a></li>
+                <li class="list-group-item"><a href="#">销售</a></li>
+                <li class="list-group-item"><a href="#">市场营销</a></li>
+                <!-- 添加更多分类 -->
+            </ul>
+        </div>
+
+        <!-- 右侧列，用于展示工作信息 -->
+        <div class="col-md-10">
+
+            <form class="mb-4" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" value="{{ query }}" placeholder="搜索工作...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="row">
+                {% for job in page %}
+                <div class="col-md-6 mb-4">
+                    <div class="card job-card">
+                        <div class="card-body">
+                            <h5 class="card-title job-title">{{ job.title }}</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>公司:</strong> {{ job.company }}</p>
+                                    <p><strong>薪资:</strong> {{ job.salary }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>地址:</strong> {{ job.address }}</p>
+                                    <p><strong>福利</strong> {{ job.post }}</p>
+
+                                </div>
+                            </div>
+                            <div class="center-button">
+                                <a href="{% url 'job_detail' job.id %}" class="btn btn-primary">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- 分页导航 -->
+            <div class="row mt-4">
+                <div class="col-md-12 center-pagination">
+                    <nav aria-label="工作列表分页">
+                        <ul class="pagination">
+                            {% if page.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">首页</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page.previous_page_number }}">上一页</a>
+                            </li>
+                            {% endif %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ page.number }}</span>
+                            </li>
+                            {% if page.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page.next_page_number }}">下一页</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page.paginator.num_pages }}">末页</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
